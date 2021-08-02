@@ -70,5 +70,21 @@ router.delete("/:productId", async(req, res, next) => {
     }
 });
 
+router.put("/:productId", async(req, res, next)=> {
+    const id = req.params.productId;
+    const product = await Product.updateOne({_id:id},{
+            name: req.body.name,
+            image: req.file.path,
+            type: req.body.type,
+            brand: req.body.brand,
+            isActive: req.body.isActive
+    });
+    if (product){
+        res.json({message: "Update success"});
+    } else {
+        res.json({message: "Update fails"})
+    }
+});
+
 module.exports = router;
 

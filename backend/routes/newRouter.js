@@ -59,11 +59,26 @@ router.post('/', upload.single("thumbnail") , async(req, res, next) => {
 
 router.delete("/:newsId", async(req, res, next) => {
     const id = req.params.newsId;
-    const news = await New.deleteOne({_id: id});
+    const news = await New.deleteOne({_id: id},
+        {
+            title: req.body.title,
+            thumbnail: req.file.path,
+            description: req.body.description,
+        });
     if (news){
         res.json({message: "Delete success"});
     } else {
         res.json({message: "Delete fails"})
+    }
+});
+
+router.put("/:newsId", async(req, res, next)=> {
+    const id = req.params.newsId;
+    const news = await New.updateOne({_id:id});
+    if (news){
+        res.json({message: "Update success"});
+    } else {
+        res.json({message: "Update fails"})
     }
 });
 

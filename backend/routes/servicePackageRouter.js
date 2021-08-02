@@ -60,11 +60,27 @@ router.post('/', async(req, res, next) => {
 
 router.delete("/:servicePackageId", async(req, res, next) => {
     const id = req.params.servicePackageId;
-    const servicePackage = await ServicePackage.deleteOne({_id: id});
+    const servicePackage = await ServicePackage.deleteOne({_id: id},
+        {
+            name: req.body.name,
+            brand: req.body.brand,
+            description: req.body.description,
+            products: req.body.products
+        });
     if (servicePackage){
         res.json({message: "Delete success"});
     } else {
         res.json({message: "Delete fails"})
+    }
+});
+
+router.put("/:servicePackageId", async(req, res, next)=> {
+    const id = req.params.servicePackageId;
+    const servicePackage = await ServicePackage.updateOne({_id:id});
+    if (servicePackage){
+        res.json({message: "Update success"});
+    } else {
+        res.json({message: "Update fails"})
     }
 });
 

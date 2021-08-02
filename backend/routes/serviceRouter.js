@@ -67,5 +67,20 @@ router.delete("/:serviceId", async(req, res, next) => {
     }
 });
 
+router.put("/:serviceId", async(req, res, next)=> {
+    const id = req.params.serviceId;
+    const service = await Service.updateOne({_id:id},
+        {
+            name: req.body.name,
+            brand: req.body.brand,
+            description: req.body.description,
+        });
+    if (service){
+        res.json({message: "Update success"});
+    } else {
+        res.json({message: "Update fails"})
+    }
+});
+
 module.exports = router;
 

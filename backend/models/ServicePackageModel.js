@@ -15,8 +15,9 @@ const servicePackageSchema = new mongoose.Schema({
     },
     products: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'Product'
+            type: String
+            // type: Schema.Types.ObjectId,
+            // ref: 'Product'
         }
     ],
 

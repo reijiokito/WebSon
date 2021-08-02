@@ -5,7 +5,7 @@ import { getToken } from '../utils';
 const router = express.Router();
 
 router.post('/signin', async(req, res) => {
-    console.log(req.body);
+    console.log("req body:"+req.body);
     const signinUser = await User.findOne({
         email: req.body.email,
         password: req.body.password
@@ -23,15 +23,15 @@ router.post('/signin', async(req, res) => {
     }
 });
 
-router.get("/createadmin", async(req,res) => {
+router.post("/createadmin", async(req,res) => {
     try{
         const user = new User({
-            name: 'CongPro',
-            email: 'anhcong9x00@gmail.com',
-            password: '123456',
+            name: 'admin@admin',
+            email: 'admin@admin',
+            password: 'admin@admin',
             isAdmin: true
         });
-    
+        console.log(user);
         const newUser = await user.save();
         res.send(user);
     }catch(e){
@@ -39,4 +39,4 @@ router.get("/createadmin", async(req,res) => {
     }
 });
 
-export default router
+export default router;
