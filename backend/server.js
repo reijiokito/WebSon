@@ -49,6 +49,7 @@ app.use((req, res, next) => {
       "Access-Control-Allow-Headers",
       "Authorization, Origin, X-Requested-With, Content-Type, Accept"
     );
+    console.log("abc");
     next();
 });
 
